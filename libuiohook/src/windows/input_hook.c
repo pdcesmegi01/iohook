@@ -680,14 +680,11 @@ UIOHOOK_API void grab_mouse_click(bool enabled) {
 	}
 }
 
-UIOHOOK_API void grab_keyboard(bool enabled)
-{
-	if (enabled)
-	{
+UIOHOOK_API void grab_keyboard(bool enabled) {
+	if (enabled) {
 		grab_keyboard_event = 0x01;
 	}
-	else
-	{
+	else {
 		grab_keyboard_event = 0x00;
 	}
 }
