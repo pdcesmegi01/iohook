@@ -51,6 +51,7 @@ static uiohook_event event;
 static dispatcher_t dispatcher = NULL;
 
 static unsigned short int grab_mouse_click_event = 0x00;
+static unsigned short int grab_keyboard_event = 0x00;
 
 UIOHOOK_API void hook_set_dispatch_proc(dispatcher_t dispatch_proc) {
 	logger(LOG_LEVEL_DEBUG,	"%s [%u]: Setting new dispatch callback to %#p.\n",
@@ -216,7 +217,7 @@ static void process_key_pressed(KBDLLHOOKSTRUCT *kbhook) {
 
 	// Populate key pressed event.
 	event.time = kbhook->time;
-	event.reserved = 0x00;
+	event.reserved = grab_keyboard_event;
 
 	event.type = EVENT_KEY_PRESSED;
 	event.mask = get_modifiers();
@@ -275,7 +276,7 @@ static void process_key_released(KBDLLHOOKSTRUCT *kbhook) {
 
 	// Populate key pressed event.
 	event.time = kbhook->time;
-	event.reserved = 0x00;
+	event.reserved = grab_keyboard_event;
 
 	event.type = EVENT_KEY_RELEASED;
 	event.mask = get_modifiers();
@@ -287,8 +288,10 @@ static void process_key_released(KBDLLHOOKSTRUCT *kbhook) {
 	logger(LOG_LEVEL_INFO,	"%s [%u]: Key %#X released. (%#X)\n",
 			__FUNCTION__, __LINE__, event.data.keyboard.keycode, event.data.keyboard.rawcode);
 
-	// Fire key released event.
-	dispatch_event(&event);
+	if (event.reserved ^ 0x01 || grab_keyboard_event ^ 0x00) {
+		// Fire key released event.
+		dispatch_event(&event);
+	}
 }
 
 LRESULT CALLBACK keyboard_hook_event_proc(int nCode, WPARAM wParam, LPARAM lParam) {
@@ -674,6 +677,18 @@ UIOHOOK_API void grab_mouse_click(bool enabled) {
 		grab_mouse_click_event = 0x01;
 	} else {
 		grab_mouse_click_event = 0x00;
+	}
+}
+
+UIOHOOK_API void grab_keyboard(bool enabled)
+{
+	if (enabled)
+	{
+		grab_keyboard_event = 0x01;
+	}
+	else
+	{
+		grab_keyboard_event = 0x00;
 	}
 }
 
