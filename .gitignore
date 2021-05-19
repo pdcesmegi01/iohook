@@ -7,12 +7,12 @@
 binding.gyp
 
 # This basically ignores every file in the build directory
-# except build/Release/iohook.node and build/Release/uiohook.lib
+# except build/Release/iohook.node and build/Release/uiohook.dll
 build/*
 !build/Release
 build/Release/*
 !build/Release/iohook.node
-!build/Release/uiohook.lib
+!build/Release/uiohook.dll
 
 builds
 docs/.vuepress/dist
