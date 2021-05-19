@@ -13,6 +13,7 @@ build/Release/*
 !build/Release/iohook.node
 !build/Release/uiohook.lib
 
+build_def/
 builds/
 build_dev/
 CMakeFiles/
