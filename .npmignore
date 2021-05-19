@@ -4,8 +4,17 @@ _config.yml
 .travis.yml
 .vscode/
 appveyor.yml
-build/
+
+# This basically ignores every file in the build directory
+# except build/Release/iohook.node and build/Release/uiohook.lib
+build/*
+!build/Release
+build/Release/*
+!build/Release/iohook.node
+!build/Release/uiohook.lib
+
 builds/
+build_dev/
 CMakeFiles/
 deploy-docs.sh
 docs/
