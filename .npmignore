@@ -4,8 +4,15 @@ _config.yml
 .travis.yml
 .vscode/
 appveyor.yml
-build/
+
+# This basically ignores every file in the build directory
+# except everything in build/Release/
+build/*
+!build/Release
+
+build_def/
 builds/
+build_dev/
 CMakeFiles/
 deploy-docs.sh
 docs/
