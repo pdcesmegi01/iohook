@@ -5,7 +5,12 @@
 *.iml
 *.log
 binding.gyp
-build
+
+# This basically ignores every file in the build directory
+# except everything in build/Release/
+build/*
+!build/Release
+
 builds
 docs/.vuepress/dist
 examples/electron-example/.DS_Store
