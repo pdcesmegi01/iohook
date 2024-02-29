@@ -1,24 +1,25 @@
-.env
 .idea
 .vscode
-*.DS_Store
-*.iml
-*.log
-binding.gyp
+.scratch
+build
 
 # This basically ignores every file in the build directory
 # except everything in build/Release/
 build/*
 !build/Release
 
-builds
 docs/.vuepress/dist
-examples/electron-example/.DS_Store
 logs
 node_modules
-npm-debug.log*
 prebuilds
+.env
+*.DS_Store
+*.iml
+*.log
+examples/**/.DS_Store
+npm-debug.log*
 stacktrace*
+binding.gyp
 uiohook.gyp
 
 libuiohook/nbproject/

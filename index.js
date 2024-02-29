@@ -1,9 +1,23 @@
 const EventEmitter = require('events');
 const path = require('path');
 
-const runtime = process.versions.electron ? 'electron' : 'node';
-const essential = `${runtime  }-v${  process.versions.modules  }-${  process.platform  }-${  process.arch}`;
-const modulePath = path.join(__dirname, 'build', 'Release', 'iohook.node');
+const runtime = process.versions['electron'] ? 'electron' : 'node';
+const essential =
+  runtime +
+  '-v' +
+  process.versions.modules +
+  '-' +
+  process.platform +
+  '-' +
+  process.arch;
+const modulePath = path.join(
+  __dirname,
+  'builds',
+  essential,
+  'build',
+  'Release',
+  'iohook.node'
+);
 if (process.env.DEBUG) {
   console.info('Loading native binary:', modulePath);
 }
@@ -66,8 +80,8 @@ class IOHook extends EventEmitter {
    * @return {number} ShortcutId for unregister
    */
   registerShortcut(keys, callback, releaseCallback) {
-    const shortcut = {};
-    const shortcutId = Date.now() + Math.random();
+    let shortcut = {};
+    let shortcutId = Date.now() + Math.random();
     keys.forEach((keyCode) => {
       shortcut[keyCode] = false;
     });
@@ -226,7 +240,10 @@ class IOHook extends EventEmitter {
       this.emit(events[msg.type], event);
 
       // If there is any registered shortcuts then handle them.
-      if ((event.type === 'keydown' || event.type === 'keyup') && iohook.shortcuts.length > 0) {
+      if (
+        (event.type === 'keydown' || event.type === 'keyup') &&
+        iohook.shortcuts.length > 0
+      ) {
         this._handleShortcut(event);
       }
     }
