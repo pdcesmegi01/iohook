@@ -1,24 +1,31 @@
-_config.yml
-.env
-.github/
-.travis.yml
+.idea/
 .vscode/
-appveyor.yml
+.scratch/
+build/
 
 # This basically ignores every file in the build directory
 # except everything in build/Release/
 build/*
 !build/Release
 
-build_def/
-builds/
-build_dev/
+docs/.vuepress/dist/
+logs/
+node_modules/
+prebuilds/
+.github/
 CMakeFiles/
-deploy-docs.sh
 docs/
 examples/
-libuiohook/
-prebuilds/
 test/
+.env
+*.DS_Store
+*.iml
+*.log
+npm-debug.log*
+stacktrace*
 /binding.gyp
 /uiohook.gyp
+.lintignore
+.eslintrc.json
+.prettierrc.json
+_config.yml
