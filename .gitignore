@@ -1,10 +1,10 @@
 .idea
 .vscode
 .scratch
-build
 
 # This basically ignores every file in the build directory
 # except everything in build/Release/
+build/*
 !build/Release
 
 docs/.vuepress/dist

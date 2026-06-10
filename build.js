@@ -164,11 +164,11 @@ function build(runtime, version, abi) {
     console.log('Building iohook for ' + runtime + ' v' + version + '>>>>');
     if (process.platform === 'win32') {
       if (version.split('.')[0] >= 4) {
-        process.env.msvs_toolset = 15;
-        process.env.msvs_version = argv.msvs_version || 2017;
+        process.env.msvs_toolset = '15';
+        process.env.msvs_version = String(argv.msvs_version || 2017);
       } else {
-        process.env.msvs_toolset = 12;
-        process.env.msvs_version = 2013;
+        process.env.msvs_toolset = '12';
+        process.env.msvs_version = '2013';
       }
       args.push('--msvs_version=' + process.env.msvs_version);
     } else {
@@ -178,9 +178,23 @@ function build(runtime, version, abi) {
       process.env.gyp_iohook_arch = arch;
     }
 
-    let proc = spawn(gypJsPath, args, {
-      env: process.env,
-    });
+    let proc;
+    if (process.platform === 'win32') {
+      const gypScriptPath = path.join(
+        __dirname,
+        'node_modules',
+        'node-gyp',
+        'bin',
+        'node-gyp.js'
+      );
+      proc = spawn(process.execPath, [gypScriptPath].concat(args), {
+        env: process.env,
+      });
+    } else {
+      proc = spawn(gypJsPath, args, {
+        env: process.env,
+      });
+    }
     proc.stdout.pipe(process.stdout);
     proc.stderr.pipe(process.stderr);
     proc.on('exit', function (code, sig) {
