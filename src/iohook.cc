@@ -559,20 +559,11 @@ NAN_METHOD(StopHook) {
 }
 
 NAN_MODULE_INIT(Init) {
-  Nan::Set(target, Nan::New<String>("startHook").ToLocalChecked(),
-  Nan::GetFunction(Nan::New<FunctionTemplate>(StartHook)).ToLocalChecked());
-
-  Nan::Set(target, Nan::New<String>("stopHook").ToLocalChecked(),
-  Nan::GetFunction(Nan::New<FunctionTemplate>(StopHook)).ToLocalChecked());
-
-  Nan::Set(target, Nan::New<String>("debugEnable").ToLocalChecked(),
-  Nan::GetFunction(Nan::New<FunctionTemplate>(DebugEnable)).ToLocalChecked());
-
-  Nan::Set(target, Nan::New<String>("grabMouseClick").ToLocalChecked(),
-  Nan::GetFunction(Nan::New<FunctionTemplate>(GrabMouseClick)).ToLocalChecked());	
-  
-  Nan::Set(target, Nan::New<String>("grabKeyboard").ToLocalChecked(),	
-  Nan::GetFunction(Nan::New<FunctionTemplate>(GrabKeyboard)).ToLocalChecked());
+  Nan::SetMethod(target, "startHook", StartHook);
+  Nan::SetMethod(target, "stopHook", StopHook);
+  Nan::SetMethod(target, "debugEnable", DebugEnable);
+  Nan::SetMethod(target, "grabMouseClick", GrabMouseClick);
+  Nan::SetMethod(target, "grabKeyboard", GrabKeyboard);
 }
 
-NODE_MODULE(nodeHook, Init)
+NODE_MODULE(iohook, Init)

@@ -16,7 +16,8 @@
   "types": "index.d.ts",
   "scripts": {
     "build": "node build.js --upload=false",
-    "build:ci": "node build.js --all",
+    "build:ci": "node build.js --all --upload=false",
+    "build:ci:upload": "node build.js --all",
     "build:print": "node -e 'require(\"./helpers\").printManualBuildParams()'",
     "test": "jest",
     "docs:dev": "vuepress dev docs",

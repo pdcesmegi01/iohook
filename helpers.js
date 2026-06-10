@@ -6,7 +6,7 @@ const fs = require('fs');
  * @return {Object}
  */
 function optionsFromPackage(attempts) {
-  attempts = attempts || 2;
+  attempts = attempts || 1;
   if (attempts > 5) {
     console.log("Can't resolve main package.json file");
     return {

@@ -43,7 +43,7 @@ function initBuild() {
     }
     options.targets = options.targets.map((targetStr) => targetStr.split('-'));
     if (process.env.npm_config_targets === 'all') {
-      options.targets = supportedTargets.map((arr) => [arr[0], arr[2]]);
+      options.targets = pkg.supportedTargets.map((arr) => [arr[0], arr[2]]);
       options.platforms = ['win32', 'darwin', 'linux'];
       options.arches = ['x64', 'ia32'];
     }

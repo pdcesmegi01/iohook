@@ -702,16 +702,17 @@ UIOHOOK_API int hook_run() {
 				__FUNCTION__, __LINE__);
 
 		hInst = GetModuleHandle(NULL);
-		if (hInst != NULL) {
-			// Initialize native input helper functions.
-            load_input_helper();
-		}
-		else {
+		if (hInst == NULL) {
 			logger(LOG_LEVEL_ERROR,	"%s [%u]: Could not determine hInst for SetWindowsHookEx()! (%#lX)\n",
 					__FUNCTION__, __LINE__, (unsigned long) GetLastError());
 
 			status = UIOHOOK_ERROR_GET_MODULE_HANDLE;
 		}
+	}
+
+	if (status != UIOHOOK_ERROR_GET_MODULE_HANDLE) {
+		// Initialize locale/input helper during normal hook startup, not under DllMain loader lock.
+		load_input_helper();
 	}
 
 	// Create the native hooks.
@@ -763,6 +764,9 @@ UIOHOOK_API int hook_run() {
 	
 	// Unregister any hooks that may still be installed.
 	unregister_running_hooks();
+
+	// Release cached keyboard locale resources initialized by load_input_helper().
+	unload_input_helper();
 
 	// We must explicitly call the cleanup handler because Windows does not
 	// provide a thread cleanup method like POSIX pthread_cleanup_push/pop.
