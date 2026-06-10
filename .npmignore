@@ -8,6 +8,10 @@ build/
 build/*
 !build/Release
 
+build_def/
+builds/
+build_dev/
+
 docs/.vuepress/dist/
 logs/
 node_modules/
