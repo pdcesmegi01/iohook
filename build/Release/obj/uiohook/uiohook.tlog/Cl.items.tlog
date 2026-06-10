@@ -1,0 +1,6 @@
+C:\RPX_HOME\repos\iohook\libuiohook\src\logger.c;C:\RPX_HOME\repos\iohook\build\Release\obj\uiohook\libuiohook\src\logger.obj
+C:\RPX_HOME\repos\iohook\libuiohook\src\windows\input_helper.c;C:\RPX_HOME\repos\iohook\build\Release\obj\uiohook\libuiohook\src\windows\input_helper.obj
+C:\RPX_HOME\repos\iohook\libuiohook\src\windows\input_hook.c;C:\RPX_HOME\repos\iohook\build\Release\obj\uiohook\libuiohook\src\windows\input_hook.obj
+C:\RPX_HOME\repos\iohook\libuiohook\src\windows\post_event.c;C:\RPX_HOME\repos\iohook\build\Release\obj\uiohook\libuiohook\src\windows\post_event.obj
+C:\RPX_HOME\repos\iohook\libuiohook\src\windows\system_properties.c;C:\RPX_HOME\repos\iohook\build\Release\obj\uiohook\libuiohook\src\windows\system_properties.obj
+C:\RPX_HOME\repos\iohook\node_modules\node-gyp\src\win_delay_load_hook.cc;C:\RPX_HOME\repos\iohook\build\Release\obj\uiohook\win_delay_load_hook.obj

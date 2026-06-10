@@ -12,8 +12,6 @@ const essential =
   process.arch;
 const modulePath = path.join(
   __dirname,
-  'builds',
-  essential,
   'build',
   'Release',
   'iohook.node'
