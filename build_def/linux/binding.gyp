@@ -8,14 +8,16 @@
 			"src/iohook.h"
 		],
 		"dependencies": [
+			"<!(node -p \"require('node-addon-api').gyp\")",
 			"./uiohook.gyp:uiohook"
 		],
-		"cflags": [
-			"-std=c++14",
+		"cflags_cc": [
+			"-std=c++17",
 			"-fPIC"
 		],
 		"defines": [
-			"USE_XKBCOMMON"
+			"USE_XKBCOMMON",
+			"NAPI_VERSION=9"
 		],
 		"link_settings": {
 				"libraries": [
@@ -24,7 +26,7 @@
 				]
 		},
 		"include_dirs": [
-			"<!(node -e \"require('nan')\")",
+			"<!@(node -p \"require('node-addon-api').include\")",
 			"libuiohook/include"
 		],
 		"configurations": {

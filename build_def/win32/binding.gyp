@@ -8,17 +8,24 @@
 			"src/iohook.h"
 		],
 		"dependencies": [
+			"<!(node -p \"require('node-addon-api').gyp\")",
 			"./uiohook.gyp:uiohook"
 		],
 		"include_dirs": [
-			"<!(node -e \"require('nan')\")",
+			"<!@(node -p \"require('node-addon-api').include\")",
 			"libuiohook/include"
+		],
+		"defines": [
+			"NAPI_VERSION=9"
 		],
 		"configurations": {
 			"Release": {
 				"msvs_settings": {
 					"VCCLCompilerTool": {
-						'ExceptionHandling': 1
+						'ExceptionHandling': 1,
+						"AdditionalOptions": [
+							"/std:c++17"
+						]
 					}
 				}
 			}
